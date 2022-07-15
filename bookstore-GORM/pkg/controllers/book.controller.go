@@ -3,11 +3,12 @@ package controllers
 import (
 	"encoding/json"
 	"fmt"
+	"net/http"
+	"strconv"
+
 	"github.com/gorilla/mux"
 	"github.com/gurucharanD/go-projects/bookstore-GORM/pkg/models"
 	"github.com/gurucharanD/go-projects/bookstore-GORM/pkg/utils"
-	"net/http"
-	"strconv"
 )
 
 var NewBook models.Book
@@ -36,9 +37,9 @@ func GetBookById(w http.ResponseWriter, r *http.Request){
 }
 
 func CreateBook(w http.ResponseWriter, r *http.Request){
-	createBook := &models.Book{}
+	CreateBook := &models.Book{}
 	utils.ParseBody(r, CreateBook)
-	b:= createBook.CreateBook()
+	b:= CreateBook.CreateBook()
 	res, _ := json.Marshal(b)
 	w.WriteHeader(http.StatusOK)
 	w.Write(res)
